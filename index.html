@@ -27,44 +27,34 @@
         h2 { font-size: 32px; margin-bottom: 20px; color: var(--primary-color); text-align: center; }
         h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto 0; border-radius: 2px; }
 
-        /* =========================================
-           PHẦN HERO - ẢNH NỀN FULL PHỦ MỜ 
-           ========================================= */
+        /* PHẦN HERO - ẢNH NỀN FULL PHỦ MỜ */
         .hero { 
-            position: relative; /* Dùng để chứa lớp phủ đen */
+            position: relative; 
             display: flex; 
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center; 
-            min-height: 90vh; /* Chỉnh độ cao full màn hình */
-            
-            /* Gọi ảnh của bạn làm nền */
+            min-height: 90vh; 
             background-image: url('workspace.png'); 
-            background-size: cover; /* Phủ kín khung */
-            background-position: center; /* Lấy tâm ảnh */
+            background-size: cover; 
+            background-position: center; 
             background-repeat: no-repeat;
-            
             padding: 80px 10%;
         }
         
-        /* Lớp mờ màu đen phủ lên trên ảnh */
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Chỉnh số 0.6 từ (0 đến 1) để tăng giảm độ mờ */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); 
             z-index: 1; 
         }
         
-        /* Phần chữ nổi lên trên lớp mờ */
         .hero-text {
             position: relative;
-            z-index: 2; /* Nổi lên trên lớp màu đen */
-            color: #ffffff; /* Đổi toàn bộ chữ sang màu trắng */
+            z-index: 2; 
+            color: #ffffff; 
         }
         
         .hero-text h1 { font-size: 54px; font-weight: 800; margin-bottom: 10px; line-height: 1.2; color: #ffffff;}
@@ -98,11 +88,33 @@
         /* Footer */
         footer { text-align: center; padding: 20px; background: #020617; color: #64748b; font-size: 14px; }
 
+        /* CSS TRÌNH PHÁT NHẠC */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.3s;
+        }
+        .music-player:hover { background: rgba(255, 255, 255, 1); }
+        .music-player audio { height: 35px; outline: none; }
+        .music-player span { font-size: 13px; font-weight: bold; color: var(--primary-color); }
+
         /* Responsive cho điện thoại */
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; }
             .about-skills { grid-template-columns: 1fr; }
             .hero-text h1 { font-size: 40px; }
+            .music-player { bottom: 10px; right: 10px; padding: 5px 10px; }
+            .music-player span { display: none; } /* Ẩn chữ trên điện thoại cho gọn */
         }
     </style>
 </head>
@@ -158,9 +170,9 @@
                 <p>Lên ý tưởng và trực quan hóa toàn bộ trải nghiệm người dùng. Xây dựng các sơ đồ luồng hoạt động và đồ thị mạng (network graphs) để thể hiện các mối liên hệ phức tạp giữa các liên hệ một cách trực quan, giúp quá trình phát triển đồng bộ trên 2 nền tảng.</p>
             </div>
             <div class="project-card">
-                <h3>Coming Soon</h3>
-                <span>Coming Soon</span>
-                <p>Một cái gì đó đang được nấu, hãy chờ tôi của tương lai khi nấu xong</p>
+                <h3>Dự án tương lai của bạn</h3>
+                <span>Tên công nghệ sử dụng</span>
+                <p>Mô tả ngắn gọn về dự án tiếp theo bạn sắp thực hiện. Ứng dụng này giải quyết vấn đề gì và vai trò của bạn là gì.</p>
             </div>
         </div>
     </section>
@@ -174,6 +186,14 @@
     <footer>
         <p>&copy; 2026 Tuyen. Thiết kế và Phát triển với sự hỗ trợ của AI.</p>
     </footer>
+
+    <div class="music-player">
+        <span>🎵 BGM</span>
+        <audio controls loop autoplay>
+            <source src="bgm.ogg" type="audio/ogg">
+            Trình duyệt của bạn không hỗ trợ phát nhạc.
+        </audio>
+    </div>
 
 </body>
 </html>
