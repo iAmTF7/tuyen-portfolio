@@ -83,6 +83,22 @@
         .btn { display: inline-block; padding: 12px 30px; background: var(--accent-color); color: white; border-radius: 8px; font-weight: bold; transition: background 0.3s; border: none; cursor: pointer;}
         .btn:hover { background: #2563eb; }
 
+        /* =========================================
+           CSS CHO BẢN QUYỀN ẢNH GÓC DƯỚI PHẢI (MỚI)
+           ========================================= */
+        .hero-copyright {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            text-align: right;
+            z-index: 5; /* Nằm trên lớp phủ nền */
+            color: rgba(255, 255, 255, 0.7); /* Màu trắng mờ tinh tế */
+            font-size: 11px;
+            font-weight: 400;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+        }
+
         /* Phần Về Tôi & Kỹ năng */
         .about-skills { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; background: var(--bg-white); }
         .about-text p { margin-bottom: 15px; font-size: 17px; color: #475569; }
@@ -138,6 +154,7 @@
             .about-skills { grid-template-columns: 1fr; }
             .hero-text h1 { font-size: 40px; }
             .avatar-img { width: 120px; height: 120px; } /* Thu nhỏ avatar trên điện thoại */
+            .hero-copyright { font-size: 9px; bottom: 10px; right: 10px; } /* Thu nhỏ bản quyền trên điện thoại */
             .music-toggle-btn { bottom: 15px; right: 15px; padding: 10px 15px; font-size: 14px; }
         }
     </style>
@@ -164,6 +181,12 @@
             <h3>Lập trình viên & Nhà thiết kế UI/UX</h3>
             <p>Tôi đam mê kiến tạo các ứng dụng Android mượt mà và thiết kế trải nghiệm người dùng tối ưu, kết nối hoàn hảo giữa những dòng code logic và giao diện trực quan nhất.</p>
             <a href="#projects" class="btn">Xem dự án nổi bật</a>
+        </div>
+        
+        <div class="hero-copyright">
+            <p>Image, Soundtrack ©2026 Tencent Game, Timi Studio Group.</p>
+            <p>©GA/ 1996,2025 SYT.</p>
+	    <p>Avatar ©Saka Mikami/ Kodansha, The Fragrant Flower Blooms With Dignity Project
         </div>
     </section>
 
@@ -196,9 +219,9 @@
                 <p>Lên ý tưởng và trực quan hóa toàn bộ trải nghiệm người dùng. Xây dựng các sơ đồ luồng hoạt động và đồ thị mạng (network graphs) để thể hiện các mối liên hệ phức tạp giữa các liên hệ một cách trực quan, giúp quá trình phát triển đồng bộ trên 2 nền tảng.</p>
             </div>
             <div class="project-card">
-                <h3>Coming soom</h3>
-                <span>Coming soon</span>
-                <p>Đang nấu. Hãy chờ tôi của tương lai.</p>
+                <h3>Dự án tương lai của bạn</h3>
+                <span>Tên công nghệ sử dụng</span>
+                <p>Mô tả ngắn gọn về dự án tiếp theo bạn sắp thực hiện. Ứng dụng này giải quyết vấn đề gì và vai trò của bạn là gì.</p>
             </div>
         </div>
     </section>
@@ -210,7 +233,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Tuyen. Thiết kế và Phát triển với sự hỗ trợ của AI. Chỉ để làm dự án của lớp.</p>
+        <p>&copy; 2026 Tuyen. Thiết kế và Phát triển với sự hỗ trợ của AI.</p>
     </footer>
 
     <audio id="bgMusic" loop>
