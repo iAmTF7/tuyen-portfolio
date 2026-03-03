@@ -83,7 +83,7 @@
         footer { text-align: center; padding: 20px; background: #020617; color: #64748b; font-size: 14px; }
 
         /* =========================================
-           NÚT CHƠI NHẠC NỔI GÓC DƯỚI (MỚI)
+           NÚT CHƠI NHẠC NỔI GÓC DƯỚI
            ========================================= */
         .music-toggle-btn {
             position: fixed;
@@ -201,8 +201,55 @@
             const audio = document.getElementById("bgMusic");
             const musicBtn = document.getElementById("musicBtn");
             
+            audio.volume = 0.6; // Giảm âm lượng một chút cho êm tai
+
             // Hàm thay đổi giao diện nút tùy theo trạng thái nhạc
             function updateButtonState() {
                 if (audio.paused) {
                     musicBtn.innerHTML = "🔇 Bật nhạc";
-                    musicBtn.style.background = "rgba(25
+                    musicBtn.style.background = "rgba(255, 255, 255, 0.9)";
+                    musicBtn.style.color = "var(--primary-color)";
+                } else {
+                    musicBtn.innerHTML = "🔊 Tắt nhạc";
+                    musicBtn.style.background = "var(--accent-color)";
+                    musicBtn.style.color = "white";
+                }
+            }
+
+            // Xử lý sự kiện khi click trực tiếp vào nút
+            musicBtn.addEventListener("click", function(event) {
+                event.stopPropagation(); // Ngăn sự kiện click lan ra ngoài
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+                updateButtonState();
+            });
+
+            // Cố gắng tự động phát
+            let playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Trình duyệt cho phép tự động phát
+                    updateButtonState();
+                })
+                .catch(error => {
+                    // Trình duyệt CHẶN tự động phát (Thường gặp)
+                    musicBtn.innerHTML = "🔇 Click web để nghe nhạc";
+                    
+                    // Lắng nghe cú click ĐẦU TIÊN vào bất kỳ đâu trên web để mở nhạc
+                    document.body.addEventListener('click', function playOnFirstInteraction() {
+                        audio.play();
+                        updateButtonState();
+                        // Mở nhạc xong thì xóa bộ lắng nghe này đi
+                        document.body.removeEventListener('click', playOnFirstInteraction);
+                    }, { once: true });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
