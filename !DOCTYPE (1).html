@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuyên | Lập trình viên & UI/UX Designer</title>
+    <style>
+        /* Cài đặt chung */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #f8fafc; color: #1e293b; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* Màu sắc chủ đạo */
+        :root { --primary-color: #0f172a; --accent-color: #3b82f6; --bg-white: #ffffff; }
+
+        /* Thanh điều hướng */
+        header { background: var(--bg-white); padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--primary-color); letter-spacing: 1px; }
+        .logo span { color: var(--accent-color); }
+        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav ul li a { font-weight: 500; transition: color 0.3s; }
+        nav ul li a:hover { color: var(--accent-color); }
+
+        /* Các phần chung */
+        section { padding: 80px 10%; }
+        h2 { font-size: 32px; margin-bottom: 20px; color: var(--primary-color); text-align: center; }
+        h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-color); margin: 10px auto 0; border-radius: 2px; }
+
+        /* =========================================
+           PHẦN HERO - ẢNH NỀN FULL PHỦ MỜ 
+           ========================================= */
+        .hero { 
+            position: relative; /* Dùng để chứa lớp phủ đen */
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center; 
+            min-height: 90vh; /* Chỉnh độ cao full màn hình */
+            
+            /* Gọi ảnh của bạn làm nền */
+            background-image: url('workspace.png'); 
+            background-size: cover; /* Phủ kín khung */
+            background-position: center; /* Lấy tâm ảnh */
+            background-repeat: no-repeat;
+            
+            padding: 80px 10%;
+        }
+        
+        /* Lớp mờ màu đen phủ lên trên ảnh */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Chỉnh số 0.6 từ (0 đến 1) để tăng giảm độ mờ */
+            z-index: 1; 
+        }
+        
+        /* Phần chữ nổi lên trên lớp mờ */
+        .hero-text {
+            position: relative;
+            z-index: 2; /* Nổi lên trên lớp màu đen */
+            color: #ffffff; /* Đổi toàn bộ chữ sang màu trắng */
+        }
+        
+        .hero-text h1 { font-size: 54px; font-weight: 800; margin-bottom: 10px; line-height: 1.2; color: #ffffff;}
+        .hero-text h3 { font-size: 24px; font-weight: 400; margin-bottom: 20px; color: #e2e8f0;}
+        .hero-text p { max-width: 600px; font-size: 18px; margin-bottom: 30px; color: #cbd5e1; margin-left: auto; margin-right: auto;}
+        
+        .btn { display: inline-block; padding: 12px 30px; background: var(--accent-color); color: white; border-radius: 8px; font-weight: bold; transition: background 0.3s; border: none; cursor: pointer;}
+        .btn:hover { background: #2563eb; }
+
+        /* Phần Về Tôi & Kỹ năng */
+        .about-skills { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; background: var(--bg-white); }
+        .about-text p { margin-bottom: 15px; font-size: 17px; color: #475569; }
+        .skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag { background: #eff6ff; color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; border: 1px solid #bfdbfe; }
+
+        /* Phần Dự án (Portfolio) */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .project-card { background: var(--bg-white); border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
+        .project-card:hover { transform: translateY(-5px); }
+        .project-card h3 { font-size: 20px; margin-bottom: 10px; color: var(--primary-color); }
+        .project-card span { font-size: 13px; color: var(--accent-color); font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 15px; }
+        .project-card p { color: #64748b; font-size: 15px; }
+
+        /* Phần Liên hệ */
+        .contact { text-align: center; background: var(--primary-color); color: white; }
+        .contact h2 { color: white; }
+        .contact p { margin-bottom: 30px; font-size: 18px; color: #cbd5e1; }
+        .contact .btn { background: white; color: var(--primary-color); }
+        .contact .btn:hover { background: #f1f5f9; }
+
+        /* Footer */
+        footer { text-align: center; padding: 20px; background: #020617; color: #64748b; font-size: 14px; }
+
+        /* Responsive cho điện thoại */
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .about-skills { grid-template-columns: 1fr; }
+            .hero-text h1 { font-size: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">TUYEN<span>.DEV</span></div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Trang chủ</a></li>
+                <li><a href="#about">Về tôi</a></li>
+                <li><a href="#projects">Dự án</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="hero-text">
+            <h1>Xin chào, tôi là Tuyên.</h1>
+            <h3>Lập trình viên & Nhà thiết kế UI/UX</h3>
+            <p>Tôi đam mê kiến tạo các ứng dụng Android mượt mà và thiết kế trải nghiệm người dùng tối ưu, kết nối hoàn hảo giữa những dòng code logic và giao diện trực quan nhất.</p>
+            <a href="#projects" class="btn">Xem dự án nổi bật</a>
+        </div>
+    </section>
+
+    <section id="about" class="about-skills">
+        <div class="about-text">
+            <h2>Về Tôi</h2>
+            <p>Là một người yêu thích công nghệ và thiết kế, tôi luôn tìm cách kết hợp tư duy logic của một nhà phát triển phần mềm với góc nhìn sáng tạo của một nhà thiết kế UI/UX.</p>
+            <p>Tôi có kinh nghiệm xử lý các vấn đề kỹ thuật sâu như gỡ lỗi (debugging) ứng dụng, tối ưu hóa độ phân giải đa thiết bị. Đồng thời, tôi luôn chú trọng xây dựng các sơ đồ hệ thống chặt chẽ để đảm bảo sản phẩm cuối cùng thân thiện với người dùng.</p>
+        </div>
+        <div class="skills">
+            <h2>Kỹ Năng</h2>
+            <div class="skills-container">
+                <span class="skill-tag">Phát triển Android</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">UI/UX Design</span>
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">Sơ đồ hệ thống (Diagrams)</span>
+                <span class="skill-tag">Mô hình hóa dữ liệu</span>
+                <span class="skill-tag">HTML / CSS</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Dự Án Tiêu Biểu</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Ứng dụng Quản lý Danh bạ Đa nền tảng</h3>
+                <span>Windows & Android | UI/UX & System Architecture</span>
+                <p>Lên ý tưởng và trực quan hóa toàn bộ trải nghiệm người dùng. Xây dựng các sơ đồ luồng hoạt động và đồ thị mạng (network graphs) để thể hiện các mối liên hệ phức tạp giữa các liên hệ một cách trực quan, giúp quá trình phát triển đồng bộ trên 2 nền tảng.</p>
+            </div>
+            <div class="project-card">
+                <h3>Coming Soon</h3>
+                <span>Coming Soon</span>
+                <p>Một cái gì đó đang được nấu, hãy chờ tôi của tương lai khi nấu xong</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Hãy cùng tạo ra những ứng dụng tuyệt vời!</h2>
+        <p>Bạn đang có một ý tưởng phần mềm mới hoặc cần tối ưu lại UI/UX? Đừng ngần ngại liên hệ nhé.</p>
+        <a href="mailto:email-cua-ban@gmail.com" class="btn">Gửi Email cho tôi</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Tuyen. Thiết kế và Phát triển với sự hỗ trợ của AI.</p>
+    </footer>
+
+</body>
+</html>
