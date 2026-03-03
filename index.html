@@ -51,12 +51,7 @@
             z-index: 1; 
         }
         
-        .hero-text {
-            position: relative;
-            z-index: 2; 
-            color: #ffffff; 
-        }
-        
+        .hero-text { position: relative; z-index: 2; color: #ffffff; }
         .hero-text h1 { font-size: 54px; font-weight: 800; margin-bottom: 10px; line-height: 1.2; color: #ffffff;}
         .hero-text h3 { font-size: 24px; font-weight: 400; margin-bottom: 20px; color: #e2e8f0;}
         .hero-text p { max-width: 600px; font-size: 18px; margin-bottom: 30px; color: #cbd5e1; margin-left: auto; margin-right: auto;}
@@ -70,7 +65,7 @@
         .skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
         .skill-tag { background: #eff6ff; color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; border: 1px solid #bfdbfe; }
 
-        /* Phần Dự án (Portfolio) */
+        /* Phần Dự án */
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
         .project-card { background: var(--bg-white); border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
         .project-card:hover { transform: translateY(-5px); }
@@ -85,36 +80,42 @@
         .contact .btn { background: white; color: var(--primary-color); }
         .contact .btn:hover { background: #f1f5f9; }
 
-        /* Footer */
         footer { text-align: center; padding: 20px; background: #020617; color: #64748b; font-size: 14px; }
 
-        /* CSS TRÌNH PHÁT NHẠC */
-        .music-player {
+        /* =========================================
+           NÚT CHƠI NHẠC NỔI GÓC DƯỚI (MỚI)
+           ========================================= */
+        .music-toggle-btn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 5px 15px;
-            border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: bold;
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
-            backdrop-filter: blur(5px);
-            transition: opacity 0.3s;
+            gap: 8px;
         }
-        .music-player:hover { background: rgba(255, 255, 255, 1); }
-        .music-player audio { height: 35px; outline: none; }
-        .music-player span { font-size: 13px; font-weight: bold; color: var(--primary-color); }
+        .music-toggle-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+        }
 
-        /* Responsive cho điện thoại */
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; }
             .about-skills { grid-template-columns: 1fr; }
             .hero-text h1 { font-size: 40px; }
-            .music-player { bottom: 10px; right: 10px; padding: 5px 10px; }
-            .music-player span { display: none; } /* Ẩn chữ trên điện thoại cho gọn */
+            .music-toggle-btn { bottom: 15px; right: 15px; padding: 10px 15px; font-size: 14px; }
         }
     </style>
 </head>
@@ -187,13 +188,21 @@
         <p>&copy; 2026 Tuyen. Thiết kế và Phát triển với sự hỗ trợ của AI.</p>
     </footer>
 
-    <div class="music-player">
-        <span>🎵 BGM</span>
-        <audio controls loop autoplay>
-            <source src="bgm.ogg" type="audio/ogg">
-            Trình duyệt của bạn không hỗ trợ phát nhạc.
-        </audio>
-    </div>
+    <audio id="bgMusic" loop>
+        <source src="bgm.ogg" type="audio/ogg">
+    </audio>
 
-</body>
-</html>
+    <button id="musicBtn" class="music-toggle-btn">
+        ⏳ Đang tải nhạc...
+    </button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const audio = document.getElementById("bgMusic");
+            const musicBtn = document.getElementById("musicBtn");
+            
+            // Hàm thay đổi giao diện nút tùy theo trạng thái nhạc
+            function updateButtonState() {
+                if (audio.paused) {
+                    musicBtn.innerHTML = "🔇 Bật nhạc";
+                    musicBtn.style.background = "rgba(25
