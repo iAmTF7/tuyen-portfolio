@@ -47,11 +47,35 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); 
+            background: rgba(0, 0, 0, 0.65); /* Làm nền tối hơn chút nữa để làm nổi bật avatar */
             z-index: 1; 
         }
         
-        .hero-text { position: relative; z-index: 2; color: #ffffff; }
+        .hero-text { 
+            position: relative; 
+            z-index: 2; 
+            color: #ffffff; 
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Căn giữa avatar và chữ */
+        }
+        
+        /* CSS CHO AVATAR CÁ NHÂN */
+        .avatar-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Bo tròn hoàn toàn */
+            object-fit: cover; /* Cắt ảnh vừa vặn không bị méo */
+            border: 4px solid var(--accent-color); /* Viền màu xanh */
+            margin-bottom: 25px; /* Khoảng cách với dòng chữ Xin chào */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4); /* Đổ bóng cho avatar */
+            transition: transform 0.3s ease;
+        }
+        
+        .avatar-img:hover {
+            transform: scale(1.05); /* Phóng to nhẹ khi di chuột vào ảnh */
+        }
+        
         .hero-text h1 { font-size: 54px; font-weight: 800; margin-bottom: 10px; line-height: 1.2; color: #ffffff;}
         .hero-text h3 { font-size: 24px; font-weight: 400; margin-bottom: 20px; color: #e2e8f0;}
         .hero-text p { max-width: 600px; font-size: 18px; margin-bottom: 30px; color: #cbd5e1; margin-left: auto; margin-right: auto;}
@@ -82,9 +106,7 @@
 
         footer { text-align: center; padding: 20px; background: #020617; color: #64748b; font-size: 14px; }
 
-        /* =========================================
-           NÚT CHƠI NHẠC NỔI GÓC DƯỚI
-           ========================================= */
+        /* NÚT CHƠI NHẠC NỔI GÓC DƯỚI */
         .music-toggle-btn {
             position: fixed;
             bottom: 25px;
@@ -115,6 +137,7 @@
             header { flex-direction: column; gap: 15px; }
             .about-skills { grid-template-columns: 1fr; }
             .hero-text h1 { font-size: 40px; }
+            .avatar-img { width: 120px; height: 120px; } /* Thu nhỏ avatar trên điện thoại */
             .music-toggle-btn { bottom: 15px; right: 15px; padding: 10px 15px; font-size: 14px; }
         }
     </style>
@@ -135,6 +158,8 @@
 
     <section id="hero" class="hero">
         <div class="hero-text">
+            <img src="avatar.jpg" alt="Avatar của Tuyên" class="avatar-img">
+            
             <h1>Xin chào, tôi là Tuyên.</h1>
             <h3>Lập trình viên & Nhà thiết kế UI/UX</h3>
             <p>Tôi đam mê kiến tạo các ứng dụng Android mượt mà và thiết kế trải nghiệm người dùng tối ưu, kết nối hoàn hảo giữa những dòng code logic và giao diện trực quan nhất.</p>
